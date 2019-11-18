@@ -1,74 +1,104 @@
 package juego;
 
 /**
- * Juego Cuatro en LÌ≠nea
  * 
- * Reglas:
+ * Juego Cuatro en L√≠nea
+ * 
+ * 
+ * @AXIOMAS:
+ * 
+ * @REGLAS:
  * 
  * 		...
  *
  */
 public class CuatroEnLinea {
-
+	
+	
+	private String jugadorRojo, jugadorAmarillo, jugadorActual;
+	private Casillero [][] matrizTablero;
+	
+	
 	/**
-	 * pre : 'filas' y 'columnas' son mayores o iguales a 4.
-	 * post: empieza el juego entre el jugador que tiene fichas rojas, identificado como 
+	 * @PRE : 'filas' y 'columnas' son mayores o iguales a 4.
+	 * @POST : empieza el juego entre el jugador que tiene fichas rojas, identificado como 
 	 * 		 'jugadorRojo' y el jugador que tiene fichas amarillas, identificado como
 	 * 		 'jugadorAmarillo'. 
-	 * 		 Todo el tablero est· vacÌo.
+	 * 		 Todo el tablero est√° vac√≠o.
 	 * 
 	 * @param filas : cantidad de filas que tiene el tablero.
 	 * @param columnas : cantidad de columnas que tiene el tablero.
 	 * @param jugadorRojo : nombre del jugador con fichas rojas.
 	 * @param jugadorAmarillo : nombre del jugador con fichas amarillas.
-	 */
+	 */		
 	public CuatroEnLinea(int filas, int columnas, String jugadorRojo, String jugadorAmarillo) {
-
+		
+			if(!validadoresEnSerie(filas,columnas,jugadorRojo,jugadorAmarillo)){
+				
+				this.matrizTablero = new Casillero[columnas][filas];
+				this.jugadorRojo = jugadorRojo;
+				this.jugadorAmarillo = jugadorAmarillo;
+				this.jugadorActual = jugadorRojo;
+				tableroVacio();
+				
+			}
+			
 	}
-
+	
+	
+	
 	/**
-	 * post: devuelve la cantidad m·xima de fichas que se pueden apilar en el tablero.
+	 * @POST: devuelve la cantidad m√°xima de fichas que se pueden apilar en el tablero.
 	 */
 	public int contarFilas() {
 		
-		return 4;
+		return matrizTablero[0].length;
 	}
 
 	/**
-	 * post: devuelve la cantidad m·xima de fichas que se pueden alinear en el tablero.
+	 * @POST: devuelve la cantidad m√°xima de fichas que se pueden alinear en el tablero.
 	 */
 	public int contarColumnas() {
 		
-		return 4;
+		return matrizTablero.length;
 	}
 
 	/**
-	 * pre : fila est· en el intervalo [1, contarFilas()],
-	 * 		 columnas est· en el intervalo [1, contarColumnas()].
-	 * post: indica quÈ ocupa el casillero en la posiciÛn dada por fila y columna.
+	 * @PRE : fila est√° en el intervalo [1, contarFilas()],
+	 * 		 columnas est√° en el intervalo [1, contarColumnas()].
+	 * @POST: indica qu√© ocupa el casillero en la posici√≥n dada por fila y columna.
 	 * 
 	 * @param fila
 	 * @param columna
 	 */
 	public Casillero obtenerCasillero(int fila, int columna) {
 		
-		return Casillero.VACIO;
+		
+		return matrizTablero[contarColumnas()-1][contarFilas()-1];
+		
 	}
 	
 	/**
-	 * pre : el juego no terminÛ, columna est· en el intervalo [1, contarColumnas()]
-	 * 		 y a˙n queda un Casillero.VACIO en la columna indicada. 
-	 * post: deja caer una ficha en la columna indicada.
+	 * @PRE : el juego no termin√≥, columna est√° en el intervalo [1, contarColumnas()]
+	 * 		 y a√∫n queda un Casillero.VACIO en la columna indicada. 
+	 * @POST: deja caer una ficha en la columna indicada.
 	 * 
 	 * @param columna
 	 */
 	public void soltarFicha(int columna) {
 		
+		if(!termino()){
+			for(int i = 0; i < this.matrizTablero.length; i++){
+				for(int j = 0; j < this.matrizTablero[i].length; j++){
+					
+				}
+			}
+		}
 	}
 	
 	/**
-	 * post: indica si el juego terminÛ porque uno de los jugadores
-	 * 		 ganÛ o no existen casilleros vacÌos.
+	 * @POST: indica si el juego termin√≥ porque uno de los jugadores
+	 * 		 gan√≥ o no existen casilleros vac√≠os.
 	 */
 	public boolean termino() {
 		
@@ -76,7 +106,7 @@ public class CuatroEnLinea {
 	}
 
 	/**
-	 * post: indica si el juego terminÛ y tiene un ganador.
+	 * @POST: indica si el juego termin√≥ y tiene un ganador.
 	 */
 	public boolean hayGanador() {
 		
@@ -84,11 +114,56 @@ public class CuatroEnLinea {
 	}
 
 	/**
-	 * pre : el juego terminÛ.
-	 * post: devuelve el nombre del jugador que ganÛ el juego.
+	 * @PRE : el juego termin√≥.
+	 * @POST: devuelve el nombre del jugador que gan√≥ el juego.
 	 */
 	public String obtenerGanador() {
 		
 		return null;
+	}
+	
+	/**
+	 * @POST: crea la matriz tablero vacia
+	 * 
+	 */
+	private void tableroVacio(){
+		for(int i = 0; i < this.matrizTablero.length; i++){
+			for(int j = 0; j < this.matrizTablero[i].length; j++){
+				this.matrizTablero[i][j] = Casillero.VACIO;
+			}
+		}
+	}
+	/**
+	 * @POST: valida los datos impuesto por el juego
+	 * 
+	 * @param filas
+	 * @param columnas
+	 * @param jugadorRojo
+	 * @param jugadorAmarillo
+	 * @return
+	 */
+	private boolean validadoresEnSerie(int filas, int columnas, String jugadorRojo, String jugadorAmarillo){
+		
+		if (filas < 4 || columnas < 4){
+			throw new Error("Las filas y columnas deben ser mayores o iguales a 4.");
+		}
+		
+		if (filas > 15 || columnas > 15){
+			throw new Error("Las filas y columnas deben ser menores o iguales a 15.");
+		}
+		
+		if (jugadorRojo.isEmpty()){
+			throw new Error("Falta el nombre del jugador Rojo.");
+		}
+		
+		if (jugadorAmarillo.isEmpty()){
+			throw new Error("Falta el nombre del jugador Amarillo.");
+		}
+		
+		if (jugadorRojo.equalsIgnoreCase(jugadorAmarillo)){
+			throw new Error("No pueden tener el mismo los jugadores.");
+		}
+		
+		return false;
 	}
 }
