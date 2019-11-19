@@ -16,7 +16,7 @@ public class CuatroEnLinea {
 	
 	
 	private String jugadorRojo, jugadorAmarillo, jugadorActual;
-	private Casillero [][] matrizTablero;
+	private Casillero [][] matrizCasilleros;
 	
 	
 	/**
@@ -33,12 +33,12 @@ public class CuatroEnLinea {
 	 */		
 	public CuatroEnLinea(int filas, int columnas, String jugadorRojo, String jugadorAmarillo) {
 		
-			if(!validadoresEnSerie(filas,columnas,jugadorRojo,jugadorAmarillo)){
+			if(datosCorrectos(filas,columnas,jugadorRojo,jugadorAmarillo)){
 				
-				this.matrizTablero = new Casillero[columnas][filas];
+				matrizCasilleros = new Casillero[columnas][filas];
 				this.jugadorRojo = jugadorRojo;
 				this.jugadorAmarillo = jugadorAmarillo;
-				this.jugadorActual = jugadorRojo;
+				jugadorActual = jugadorRojo;
 				tableroVacio();
 				
 			}
@@ -52,7 +52,7 @@ public class CuatroEnLinea {
 	 */
 	public int contarFilas() {
 		
-		return matrizTablero[0].length;
+		return matrizCasilleros[0].length;
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class CuatroEnLinea {
 	 */
 	public int contarColumnas() {
 		
-		return matrizTablero.length;
+		return matrizCasilleros.length;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class CuatroEnLinea {
 	public Casillero obtenerCasillero(int fila, int columna) {
 		
 		
-		return matrizTablero[contarColumnas()-1][contarFilas()-1];
+		return matrizCasilleros[contarColumnas()-1][contarFilas()-1];
 		
 	}
 	
@@ -87,14 +87,11 @@ public class CuatroEnLinea {
 	 */
 	public void soltarFicha(int columna) {
 		
-		if(!termino()){
-			for(int i = 0; i < this.matrizTablero.length; i++){
-				for(int j = 0; j < this.matrizTablero[i].length; j++){
-					
-				}
-			}
-		}
+		
+			
 	}
+	
+	
 	
 	/**
 	 * @POST: indica si el juego terminó porque uno de los jugadores
@@ -127,9 +124,9 @@ public class CuatroEnLinea {
 	 * 
 	 */
 	private void tableroVacio(){
-		for(int i = 0; i < this.matrizTablero.length; i++){
-			for(int j = 0; j < this.matrizTablero[i].length; j++){
-				this.matrizTablero[i][j] = Casillero.VACIO;
+		for(int i = 0; i < this.matrizCasilleros.length; i++){
+			for(int j = 0; j < this.matrizCasilleros[i].length; j++){
+				this.matrizCasilleros[i][j] = Casillero.VACIO;
 			}
 		}
 	}
@@ -142,14 +139,14 @@ public class CuatroEnLinea {
 	 * @param jugadorAmarillo
 	 * @return
 	 */
-	private boolean validadoresEnSerie(int filas, int columnas, String jugadorRojo, String jugadorAmarillo){
+	private boolean datosCorrectos(int filas, int columnas, String jugadorRojo, String jugadorAmarillo){
 		
 		if (filas < 4 || columnas < 4){
 			throw new Error("Las filas y columnas deben ser mayores o iguales a 4.");
 		}
 		
-		if (filas > 15 || columnas > 15){
-			throw new Error("Las filas y columnas deben ser menores o iguales a 15.");
+		if (filas > 12 || columnas > 12){
+			throw new Error("Las filas y columnas deben ser menores o iguales a 12.");
 		}
 		
 		if (jugadorRojo.isEmpty()){
@@ -164,6 +161,6 @@ public class CuatroEnLinea {
 			throw new Error("No pueden tener el mismo los jugadores.");
 		}
 		
-		return false;
+		return true;
 	}
 }
