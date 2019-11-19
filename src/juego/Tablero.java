@@ -14,7 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Representación gráfica del Tablero del Juego Cuatro en Lí­nea.
+ * RepresentaciÃ³n grÃ¡fica del Tablero del Juego Cuatro en LÃ­Â­nea.
  * 
  */
 public class Tablero {
@@ -29,7 +29,7 @@ public class Tablero {
 	private Stage escenario;
 
 	/**
-	 * post: asocia el Tablero a 'nuevoJuego' y lo inicializa a partir de su estado. 
+	 * @POST: asocia el Tablero a 'nuevoJuego' y lo inicializa a partir de su estado. 
 	 * 
 	 * @param nuevoJuego
 	 */
@@ -41,14 +41,14 @@ public class Tablero {
 	}
 	
 	/**
-	 * post: muestra el Tablero en pantalla.
+	 * @POST: muestra el Tablero en pantalla.
 	 */
 	public void mostrar() {
 		
 		dibujarBotones();
 		
-		double ancho = juego.contarColumnas() * ANCHO_COLUMNA;
-		double alto = (juego.contarFilas() * ALTO_FILA) + ALTURA_BOTON;
+		double ancho = juego.contarColumnas() * ANCHO_COLUMNA - 11;
+		double alto = (juego.contarFilas() * ALTO_FILA) + ALTURA_BOTON - 15;
 		
 		Scene escena = new Scene(grilla, ancho, alto);
 
@@ -62,13 +62,13 @@ public class Tablero {
 	}
 	
 	/**
-	 * post: agrega los botones para soltar una ficha en cada columna del Tablero.
+	 * @POST: agrega los botones para soltar una ficha en cada columna del Tablero.
 	 */
 	private void dibujarBotones() {
 		
 		for (int columna = 1; columna <= juego.contarColumnas(); columna++) {
 
-			Button botonSoltarFicha = new Button("soltar");
+			Button botonSoltarFicha = new Button("Lanzar");
 			botonSoltarFicha.setMinHeight(ALTURA_BOTON);
 
 			botonSoltarFicha.setOnAction(new SoltarFicha(this, juego, columna));
@@ -78,7 +78,7 @@ public class Tablero {
 	}
 	
 	/**
-	 * post: actualiza el Tablero a partir del estado del juego asociado.
+	 * @POST: actualiza el Tablero a partir del estado del juego asociado.
 	 */
 	public void dibujar() {
 
@@ -96,23 +96,24 @@ public class Tablero {
 	}
 
 	/**
-	 * post: dibuja y devuelve el casillero dado.
+	 * @POST: dibuja y devuelve el casillero dado.
 	 * 
 	 * @param casillero
-	 * @return representación gráfica del Casillero.
+	 * @return representaciÃ³n grÃ¡fica del Casillero.
 	 */
 	private Circle dibujarCasillero(Casillero casillero) {
 		
 		Circle dibujoCasillero = new Circle(RADIO, obtenerPintura(casillero));
 		
 		dibujoCasillero.setStroke(new Color(0.5, 0.5, 0.5, 1.0));
-		dibujoCasillero.setScaleX(0.95);
-		dibujoCasillero.setScaleY(0.95);
+		dibujoCasillero.setScaleX(.90);
+		dibujoCasillero.setScaleZ(.90);
+		dibujoCasillero.setScaleY(.90);
 		return dibujoCasillero;
 	}
 
 	/**
-	 * post: determina la pintura a utilizar para 'casillero'.
+	 * @POST: determina la pintura a utilizar para 'casillero'.
 
 	 * @param casillero
 	 * @return pintura a utilizar para identificar el Casillero.
@@ -139,8 +140,8 @@ public class Tablero {
 	}
 
 	/**
-	 * pre : el juego asociado terminó.
-	 * post: muestra un mensaje indicando el resultado del juego.
+	 * @PRE : el juego asociado terminÃ³.
+	 * @POST: muestra un mensaje indicando el resultado del juego.
 	 */
 	public void mostrarResultado() {
 
@@ -153,7 +154,7 @@ public class Tablero {
 		
 		if (juego.hayGanador()) {
 		
-			textoResultado = new Text("Ganó el jugador " + juego.obtenerGanador());
+			textoResultado = new Text("GanÃ³ el jugador " + juego.obtenerGanador());
 			
 		} else {
 			
