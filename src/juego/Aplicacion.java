@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image; 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,14 +14,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * Aplicación del juego Cuatro en Lí­nea.
+ * AplicaciÃ³n del juego Cuatro en LÃ­nea.
  * 
  * Punto de entrada del programa.
  * 
  */
 public class Aplicacion extends Application {
 
-	public static final String TITULO = "Cuatro en Lí­nea";
+	public static final String TITULO = "Cuatro en LÃ­nea";
 	
 	private GridPane grilla;
 	
@@ -40,6 +41,7 @@ public class Aplicacion extends Application {
 		Scene escena = new Scene(grilla, 400, 300);
 		escenarioPrincipal.setScene(escena);
 		escenarioPrincipal.setTitle(TITULO);
+		escenarioPrincipal.getIcons().add(new Image("file:src/juego/connect4.png"));
 		escenarioPrincipal.show();
 	}
 
@@ -72,11 +74,11 @@ public class Aplicacion extends Application {
 
 	private void crearControles() {
 
-		campoNombreJugadorRojo = new TextField("rojo");
-		campoNombreJugadorAmarillo = new TextField("amarillo");
+		campoNombreJugadorRojo = new TextField("Rojo");
+		campoNombreJugadorAmarillo = new TextField("Amarillo");
 		
-		campoColumnas = new TextField("7");
-		campoFilas = new TextField("7");
+		campoColumnas = new TextField("4");
+		campoFilas = new TextField("4");
 		
 		botonIniciar = new Button("Iniciar");
 		botonIniciar.setOnAction(new IniciarJuego(this));
@@ -84,7 +86,7 @@ public class Aplicacion extends Application {
 	
 	/**
 	 * post: crea un juego CuatroEnLinea, lo asocia a una Tablero 
-	 * 		 y comienza su ejecución.
+	 * 		 y comienza su ejecuciÃ³n.
 	 * 
 	 */
 	public void iniciar() {
@@ -99,6 +101,7 @@ public class Aplicacion extends Application {
 		
 		Tablero tablero = new Tablero(juego);
 		tablero.mostrar();
+		
 	}
 	
 	public static void main(String[] args) {
