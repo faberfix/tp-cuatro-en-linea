@@ -43,6 +43,7 @@ public class Aplicacion extends Application {
 		escenarioPrincipal.setTitle(TITULO);
 		escenarioPrincipal.getIcons().add(new Image("file:src/juego/connect4.png"));
 		escenarioPrincipal.show();
+		
 	}
 
 	private void crearGrilla() {
@@ -51,7 +52,8 @@ public class Aplicacion extends Application {
 		grilla.setAlignment(Pos.CENTER);
 		grilla.setHgap(20);
 		grilla.setVgap(20);
-		
+		String image = "file:src/juego/fondoNebuloso.jpg";
+		grilla.setStyle("-fx-background-image: url('" + image + "'); " + "-fx-backgroundposition: center center; " + "-fx-background-repeat: stretch");
 		Text textoTitulo = new Text(TITULO);
 		textoTitulo.setFont(new Font(16));
 		
