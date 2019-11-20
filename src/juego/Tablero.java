@@ -14,7 +14,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Representación gráfica del Tablero del Juego Cuatro en Lí­nea.
+ * 
+ * Representación gráfica del Tablero del Juego Cuatro en Linea.
  * 
  */
 public class Tablero {
@@ -38,6 +39,7 @@ public class Tablero {
 		juego = nuevoJuego;
 		escenario = new Stage();
 		grilla = new GridPane();
+		
 	}
 	
 	/**
@@ -91,6 +93,7 @@ public class Tablero {
 				Circle dibujoCasillero = dibujarCasillero(casillero);
 				
 				grilla.add(dibujoCasillero, columna - 1, fila);
+				
 			}
 		}
 	}
@@ -99,7 +102,7 @@ public class Tablero {
 	 * @POST: dibuja y devuelve el casillero dado.
 	 * 
 	 * @param casillero
-	 * @return representación gráfica del Casillero.
+	 * @return representaciÃ³n grÃ¡fica del Casillero.
 	 */
 	private Circle dibujarCasillero(Casillero casillero) {
 		
@@ -140,7 +143,7 @@ public class Tablero {
 	}
 
 	/**
-	 * @PRE : el juego asociado terminó.
+	 * @PRE : el juego asociado termina.
 	 * @POST: muestra un mensaje indicando el resultado del juego.
 	 */
 	public void mostrarResultado() {
@@ -154,7 +157,7 @@ public class Tablero {
 		
 		if (juego.hayGanador()) {
 		
-			textoResultado = new Text("Ganó el jugador " + juego.obtenerGanador());
+			textoResultado = new Text("Gana el jugador " + juego.obtenerGanador());
 			
 		} else {
 			
